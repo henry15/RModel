@@ -1,5 +1,5 @@
 
 #* @get /hello
-function() {
-  print("Hello, world!")
+function(input) {
+  print(input)
 }
