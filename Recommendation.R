@@ -54,8 +54,8 @@ searchcategoryName= subset(CategoryNameData, category_id == searchCategory, sele
 print(paste('TOP 10 Recommendations for \'',searchcategoryName[1,],'\' are: '))
 print(as.data.frame(RecommendedCategoryName))
 #return 'test'
-  #toJSON(RecommendedCategoryName, method="C" )
+  toJSON(RecommendedCategoryName, method="C" )
 #toString("test")
   #toString(as.data.frame(RecommendedCategoryName))
-return(list(response = jsonlite::unbox("This is my text")))
+#return(list(response = jsonlite::unbox("This is my text")))
 }
