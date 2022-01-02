@@ -15,7 +15,7 @@ function(input) {
 ####-----Recommendation Engine -----
 
 #* @get  /analyse
-recommendSearch <- function(input){
+function(input){
 # input the searchCategory id as per the requirement
 searchCategory= input  ##'133629'
 
@@ -54,7 +54,7 @@ searchcategoryName= subset(CategoryNameData, category_id == searchCategory, sele
 print(paste('TOP 10 Recommendations for \'',searchcategoryName[1,],'\' are: '))
 print(as.data.frame(RecommendedCategoryName))
 #return 'test'
-  toJSON(RecommendedCategoryName, method="C" )
+toJSON(as.data.frame(RecommendedCategoryName))
 #toString("test")
   #toString(as.data.frame(RecommendedCategoryName))
 #return(list(response = jsonlite::unbox("This is my text")))
