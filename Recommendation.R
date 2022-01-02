@@ -1,5 +1,5 @@
 
-#* @get /hello
+#* @get /Recommendation
 function(input) {
   print(input)
 }
