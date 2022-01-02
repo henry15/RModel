@@ -1,5 +1,5 @@
-library(jsonlite)
 
-hello <- function() {
+#* @get /hello
+function() {
   print("Hello, world!")
 }
