@@ -1,5 +1,5 @@
 
 #* @get /analyse
 function(input) {
-  input
+  toJSON(input)
 }
