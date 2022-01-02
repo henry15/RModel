@@ -1,5 +1,5 @@
 
-#* @get /Recommendation
+#* @get /analyse
 function(input) {
   print(input)
 }
