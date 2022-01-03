@@ -12,7 +12,7 @@ function(input){
 searchCategory= input  ##'133629'
 
 #read the data ---- Note: Alter the file path as per your location
-data<- read.csv("D:\\ISM\\structureValidatingProcedures\\Task3DataSet\\rub_dat.csv") 
+data<- read.csv("/rub_dat_Minimised.csv") 
 filter=subset(data, category_id==searchCategory) #filter the data as per input
 frame=data.frame(filter)
 customerIds=frame[1]   # frame1 index fetches the customerId column values
@@ -32,7 +32,7 @@ RecommendedCategories= sqldf(sprintf("select category_id,count(category_id) as f
 
 
 # Read the categoryName file and query through it to fetch corresponding names for recommendedCategoryIds
-CategoryNameData<- read.csv("D:\\ISM\\structureValidatingProcedures\\Task3DataSet\\Strukturbaum_Namen.csv") 
+CategoryNameData<- read.csv("/Strukturbaum_Namen.csv") 
 RecommendedCategoryName=sqldf(sprintf("select rc.frequency,category_de as GermanName, category_en as EnglishName 
                         from CategoryNameData cd
                         inner join RecommendedCategories rc on rc.category_id = cd.category_id
