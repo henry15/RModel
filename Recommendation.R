@@ -6,7 +6,7 @@ library(jsonlite)
 
 ####-----Recommendation Engine -----
 
-#* @get  /Recommendation
+#* @get  /analyse
 function(input){
 # input the searchCategory id as per the requirement
 searchCategory= input  ##'133629'
