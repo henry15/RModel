@@ -8,8 +8,11 @@ library(jsonlite)
 
 #* @get  /analyse
 function(input){
+  
+splitVals = strsplit(input, ',')
+for(v in splitVals){
 # input the searchCategory id as per the requirement
-searchCategory= input  ##'133629'
+searchCategory= v  ##'133629'
 
 #read the data ---- Note: Alter the file path as per your location
 data<- read.csv("rub_dat_Minimised.csv") 
@@ -28,7 +31,7 @@ library(sqldf)
 RecommendedCategories= sqldf(sprintf("select category_id,count(category_id) as frequency from frequencyData 
                               where category_id != '%s'
                               Group By category_id 
-                              order by frequency desc Limit 10",searchCategory))
+                              order by frequency desc Limit 25",searchCategory))
 
 
 # Read the categoryName file and query through it to fetch corresponding names for recommendedCategoryIds
@@ -38,7 +41,7 @@ RecommendedCategoryName=sqldf(sprintf("select rc.frequency,category_de as German
                         inner join RecommendedCategories rc on rc.category_id = cd.category_id
                         and cd.category_id != '%s'
                         group by cd.category_id
-                        order by rc.frequency desc Limit 10",searchCategory))
+                        order by rc.frequency desc Limit 25",searchCategory))
 
 #Get the categoryName for input categoryId
 searchcategoryName= subset(CategoryNameData, category_id == searchCategory, select = category_de)
@@ -46,5 +49,7 @@ searchcategoryName= subset(CategoryNameData, category_id == searchCategory, sele
 #print(paste('TOP 10 Recommendations for \'',searchcategoryName[1,],'\' are: '))
 #print(as.data.frame(RecommendedCategoryName))
 
- return(toJSON(as.data.frame(RecommendedCategoryName)))
+    
+  }
+return(toJSON(as.data.frame(RecommendedCategoryName)))
 }
