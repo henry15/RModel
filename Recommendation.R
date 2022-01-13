@@ -31,7 +31,7 @@ library(sqldf)
 RecommendedCategories= sqldf(sprintf("select category_id,count(category_id) as frequency, cast(count(category_id) AS real)/%s as RelFreq from frequencyData 
                               where category_id != '%s'
                               Group By category_id 
-                              order by frequency desc Limit 25",nrow(customerIds),searchCategory))
+                              order by RelFreq desc Limit 25",nrow(customerIds),searchCategory))
 
 
 # Read the categoryName file and query through it to fetch corresponding names for recommendedCategoryIds
@@ -41,7 +41,7 @@ RecommendedCategoryName = sqldf(sprintf("select rc.RelFreq as RelativeFrequency,
                         inner join RecommendedCategories rc on rc.category_id = cd.category_id
                         and cd.category_id != '%s'
                         group by cd.category_id
-                        order by rc.RelFreq, rc.frequency  desc Limit 25",searchCategory))
+                        order by rc.RelFreq  desc Limit 25",searchCategory))
 
 #Get the categoryName for input categoryId
 searchcategoryName= subset(CategoryNameData, category_id == searchCategory, select = category_de)
