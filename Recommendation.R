@@ -19,11 +19,13 @@ data<- read.csv("rub_dat_Minimised.csv")
 filter=subset(data, category_id==searchCategory) #filter the data as per input
 frame=data.frame(filter)
 customerIds=frame[1]   # frame1 index fetches the customerId column values
-print(nrow(customerIds))
+#print(nrow(customerIds))
 for(customerid in customerIds){
   #find categoryIds for each customerid and store in variable
-  filteredCategoryId= subset(data, customer_id %in% customerid, select = category_id)
+  filteredCategoryId= subset(data, customer_id %in% customerid & category_id != v, select = category_id)
 }
+
+filteredCategoryId= subset(filteredCategoryId, !(category_id %in% (v)) & category_id != v, select = category_id)
 
 frequencyData=data.frame(filteredCategoryId)
 library(sqldf)
